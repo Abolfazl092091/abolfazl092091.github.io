@@ -73,7 +73,6 @@ textarea{min-height:100px}
 </main>
 
 <div class="modal" id="m1"><div class="sheet"><button class="x" onclick="cl()">×</button><h3>📞 پشتیبانی</h3>
-<p class="mu">شماره و آیدی‌ها رو داخل کد (بخش CFG) عوض کن.</p>
 <a class="btn" id="cp" href="#">تماس تلفنی</a><br><a class="btn gr" id="cr" href="#" target="_blank">پیام در روبیکا</a><br><a class="btn gr" id="cb" href="#" target="_blank">پیام در بله</a></div></div>
 
 <div class="modal" id="m2"><div class="sheet"><button class="x" onclick="cl()">×</button><h3>📘 راهنمای سفارش</h3>
@@ -97,9 +96,9 @@ textarea{min-height:100px}
 <button class="btn gr" onclick="logout()">خروج</button></div>
 <div class="msg hide" id="am"></div></div></div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.58.0/dist/umd/supabase.min.js"></script>
 <script>
-var CFG={URL:"",KEY:"",PHONE:"09120000000",RUBIKA:"your_id",BALE:"your_id"};
+var CFG={URL:"https://pftikahbfbbbdbacbklh.supabase.co",KEY:"sb_publishable_4byrs_uw_h2PrIRPdk-FwQ_PH0prZyz",PHONE:"09113087431",RUBIKA:"Abolfazl_23_14",BALE:"Abolfazl_23_149"};
 var sb=null,demo=true,PF=[{title:"فروشگاه لوازم آرایشی",descr:"نمونه",image_url:""},{title:"سایت رستوران",descr:"نمونه",image_url:""},{title:"لندینگ‌پیج دوره آموزشی",descr:"نمونه",image_url:""},{title:"پورتفولیو عکاس",descr:"نمونه",image_url:""}],RV=[{name:"مشتری نمونه",rating:5,comment:"سریع و تمیز تحویل داد.",approved:true}];
 try{if(CFG.URL&&CFG.KEY&&window.supabase){sb=supabase.createClient(CFG.URL,CFG.KEY);demo=false}}catch(e){}
 function $(i){return document.getElementById(i)}
