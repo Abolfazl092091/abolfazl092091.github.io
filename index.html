@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>استودیو طراحی سایت</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f5f6fa;--cd:#fff;--tx:#1b1d29;--mu:#6d7184;--ac:#4f46e5;--br:#e1e3ee}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10111a;--cd:#1a1c28;--tx:#eef0fa;--mu:#9a9eb5;--ac:#818cf8;--br:#2c2f42}}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Tahoma,"Vazirmatn",sans-serif;line-height:1.8}
+.top{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:9;border-bottom:1px solid var(--br)}
+.top b{color:var(--ac);font-size:18px}
+.dots{border:1px solid var(--br);background:var(--cd);color:var(--tx);border-radius:10px;width:40px;height:40px;font-size:22px;cursor:pointer}
+.menu{position:absolute;left:16px;top:56px;background:var(--cd);border:1px solid var(--br);border-radius:12px;min-width:190px;display:none;box-shadow:0 8px 24px #0003}
+.menu.on{display:block}.menu a{display:block;padding:12px 16px;color:var(--tx);text-decoration:none;cursor:pointer;border-bottom:1px solid var(--br)}.menu a:last-child{border:0}
+main{max-width:640px;margin:0 auto;padding:0 16px 40px}
+.hero{text-align:center;padding:28px 0 8px}.hero h1{margin:0;font-size:24px}.hero p{color:var(--mu);margin:6px 0 14px}
+h2{font-size:18px;margin:26px 0 10px}
+.btn{display:block;width:100%;padding:13px;border:0;border-radius:12px;background:var(--ac);color:#fff;font:inherit;font-weight:bold;cursor:pointer;text-align:center;text-decoration:none}
+.btn.sm{display:inline-block;width:auto;padding:7px 14px;font-size:13px}.btn.gr{background:var(--cd);color:var(--tx);border:1px solid var(--br)}.btn.rd{background:#c0392b}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.card{background:var(--cd);border:1px solid var(--br);border-radius:14px;padding:12px;margin:8px 0}
+.grid .card{margin:0;padding:0;overflow:hidden}.grid img,.ph{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--br)}
+.ph{display:flex;align-items:center;justify-content:center;font-size:34px}.grid .t{padding:8px 10px;font-size:14px}.grid .t small{display:block;color:var(--mu);font-size:12px}
+label{display:block;font-size:13px;color:var(--mu);margin:10px 0 4px}
+input,select,textarea{width:100%;padding:11px;border:1px solid var(--br);border-radius:10px;background:var(--bg);color:var(--tx);font:inherit}
+textarea{min-height:100px}
+.msg{margin-top:10px;padding:10px;border-radius:10px;background:var(--bg);font-size:14px}.ok{color:#2e8b57}.bad{color:#c0392b}
+.hide{display:none}.mu{color:var(--mu);font-size:13px}.st{color:#f5a623}
+.modal{position:fixed;inset:0;background:#000a;z-index:20;display:none;align-items:flex-end;justify-content:center}.modal.on{display:flex}
+.sheet{background:var(--bg);width:100%;max-width:640px;max-height:88%;overflow:auto;border-radius:18px 18px 0 0;padding:16px 16px calc(24px + env(safe-area-inset-bottom,0px))}
+.sheet h3{margin:0 0 8px}.x{float:left;background:none;border:0;color:var(--tx);font-size:22px;cursor:pointer}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.demo{background:#f5a62333;color:var(--tx);padding:8px;border-radius:10px;font-size:12px;text-align:center;margin-top:10px}
+</style>
+</head>
+<body>
+<div class="top"><b>🎨 استودیو طراحی سایت</b><button class="dots" onclick="tg()" aria-label="منو">⋮</button></div>
+<div class="menu" id="menu">
+<a onclick="op('m1')">📞 تماس با پشتیبانی</a>
+<a onclick="op('m2')">📘 راهنمای سفارش</a>
+<a onclick="op('m3')">⭐ رضایت مشتریان</a>
+</div>
+
+<main>
+<div class="hero"><h1>سایتت رو سریع و حرفه‌ای بساز</h1><p>نمونه‌کارها رو ببین و سفارشت رو ثبت کن</p>
+<a class="btn" href="#order">ثبت سفارش</a><div class="demo hide" id="demo">حالت نمایشی: هنوز به دیتابیس وصل نیست</div></div>
+
+<h2>نمونه‌کارها</h2><div class="grid" id="pf"></div>
+
+<h2 id="order">ثبت سفارش</h2>
+<div class="card" id="o1">
+<label>سایتت چی باشه؟ توضیح بده</label>
+<textarea id="od" placeholder="مثلاً: سایت فروشگاهی برای لوازم آرایشی با پرداخت آنلاین..."></textarea>
+<button class="btn" style="margin-top:12px" onclick="step2()">ادامه</button></div>
+<div class="card hide" id="o2">
+<label>نام</label><input id="fn"><label>نام خانوادگی</label><input id="ln">
+<label>شمارهٔ تماس</label><input id="ph" inputmode="numeric" placeholder="09123456789">
+<label>تحویل از طریق</label><select id="ms"><option>روبیکا</option><option>بله</option></select>
+<label>آیدی روبیکا یا بله</label><input id="mi" dir="ltr" placeholder="@id">
+<button class="btn" style="margin-top:12px" onclick="sendOrder()">ثبت نهایی سفارش</button>
+<button class="btn gr" style="margin-top:8px" onclick="back()">بازگشت</button></div>
+<div class="msg hide" id="om"></div>
+
+<h2>رضایت مشتریان</h2>
+<div id="rv"></div>
+<div class="card"><b>نظرت رو بنویس</b>
+<label>نام</label><input id="rn"><label>امتیاز</label>
+<select id="rr"><option value="5">⭐⭐⭐⭐⭐</option><option value="4">⭐⭐⭐⭐</option><option value="3">⭐⭐⭐</option><option value="2">⭐⭐</option><option value="1">⭐</option></select>
+<label>نظر</label><textarea id="rc" style="min-height:70px"></textarea>
+<button class="btn" style="margin-top:12px" onclick="sendRev()">ارسال نظر</button><div class="msg hide" id="rm"></div></div>
+</main>
+
+<div class="modal" id="m1"><div class="sheet"><button class="x" onclick="cl()">×</button><h3>📞 پشتیبانی</h3>
+<p class="mu">شماره و آیدی‌ها رو داخل کد (بخش CFG) عوض کن.</p>
+<a class="btn" id="cp" href="#">تماس تلفنی</a><br><a class="btn gr" id="cr" href="#" target="_blank">پیام در روبیکا</a><br><a class="btn gr" id="cb" href="#" target="_blank">پیام در بله</a></div></div>
+
+<div class="modal" id="m2"><div class="sheet"><button class="x" onclick="cl()">×</button><h3>📘 راهنمای سفارش</h3>
+<div class="card">۱) نمونه‌کارها رو ببین و ایده بگیر.</div>
+<div class="card">۲) توی بخش «ثبت سفارش» توضیح بده سایتت چی باشه.</div>
+<div class="card">۳) نام، شماره و آیدی روبیکا یا بله‌ات رو وارد کن.</div>
+<div class="card">۴) من تماس می‌گیرم، قیمت و زمان رو هماهنگ می‌کنیم و سایت از طریق روبیکا یا بله تحویل داده میشه.</div></div></div>
+
+<div class="modal" id="m3"><div class="sheet"><button class="x" onclick="cl()">×</button><h3>⭐ رضایت مشتریان</h3>
+<div id="rv2"></div><a class="btn gr" href="#" onclick="cl();document.getElementById('rn').scrollIntoView();return false">ثبت نظر جدید</a></div></div>
+
+<div class="modal" id="m4"><div class="sheet"><button class="x" onclick="cl()">×</button><h3>🔐 پنل مدیر</h3>
+<div id="al"><label>ایمیل</label><input id="ae" dir="ltr"><label>رمز</label><input id="ap" type="password" dir="ltr">
+<button class="btn" style="margin-top:12px" onclick="login()">ورود</button></div>
+<div id="ad" class="hide">
+<div class="card"><b>افزودن نمونه‌کار</b><label>عنوان</label><input id="pt"><label>توضیح کوتاه</label><input id="pd"><label>عکس</label><input id="pi" type="file" accept="image/*">
+<button class="btn" style="margin-top:12px" onclick="addPf()">افزودن</button></div>
+<h3>نمونه‌کارها</h3><div id="apf"></div>
+<h3>سفارش‌ها</h3><div id="aor"></div>
+<h3>نظرها</h3><div id="arv"></div>
+<button class="btn gr" onclick="logout()">خروج</button></div>
+<div class="msg hide" id="am"></div></div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script>
+var CFG={URL:"",KEY:"",PHONE:"09120000000",RUBIKA:"your_id",BALE:"your_id"};
+var sb=null,demo=true,PF=[{title:"فروشگاه لوازم آرایشی",descr:"نمونه",image_url:""},{title:"سایت رستوران",descr:"نمونه",image_url:""},{title:"لندینگ‌پیج دوره آموزشی",descr:"نمونه",image_url:""},{title:"پورتفولیو عکاس",descr:"نمونه",image_url:""}],RV=[{name:"مشتری نمونه",rating:5,comment:"سریع و تمیز تحویل داد.",approved:true}];
+try{if(CFG.URL&&CFG.KEY&&window.supabase){sb=supabase.createClient(CFG.URL,CFG.KEY);demo=false}}catch(e){}
+function $(i){return document.getElementById(i)}
+function esc(s){var d=document.createElement("div");d.textContent=s==null?"":s;return d.innerHTML}
+function msg(i,t,c){var e=$(i);e.className="msg "+(c||"");e.textContent=t}
+function tg(){$("menu").classList.toggle("on")}
+function op(i){$("menu").classList.remove("on");$(i).classList.add("on")}
+function cl(){document.querySelectorAll(".modal").forEach(function(m){m.classList.remove("on")})}
+document.addEventListener("click",function(e){if(!e.target.closest(".menu,.dots"))$("menu").classList.remove("on")});
+$("cp").href="tel:"+CFG.PHONE;$("cr").href="https://rubika.ir/"+CFG.RUBIKA;$("cb").href="https://ble.ir/"+CFG.BALE;
+if(demo)$("demo").classList.remove("hide");
+
+async function loadPf(){if(!demo){var r=await sb.from("portfolio").select("*").order("created_at",{ascending:false});PF=r.data||[]}
+$("pf").innerHTML=PF.length?PF.map(function(p){return '<div class="card">'+(p.image_url?'<img src="'+esc(p.image_url)+'" alt="">':'<div class="ph">🖥️</div>')+'<div class="t">'+esc(p.title)+'<small>'+esc(p.descr)+'</small></div></div>'}).join(""):'<p class="mu">هنوز نمونه‌کاری اضافه نشده.</p>'}
+async function loadRv(){if(!demo){var r=await sb.from("reviews").select("*").eq("approved",true).order("created_at",{ascending:false}).limit(20);RV=r.data||[]}
+var h=RV.length?RV.map(function(v){return '<div class="card"><span class="st">'+"⭐".repeat(v.rating)+'</span> <b>'+esc(v.name)+'</b><br>'+esc(v.comment)+'</div>'}).join(""):'<p class="mu">هنوز نظری ثبت نشده.</p>';$("rv").innerHTML=h;$("rv2").innerHTML=h}
+
+function step2(){if($("od").value.trim().length<10)return msg("om","لطفاً توضیح بیشتری بده.","bad");$("om").className="msg hide";$("o1").classList.add("hide");$("o2").classList.remove("hide")}
+function back(){$("o2").classList.add("hide");$("o1").classList.remove("hide")}
+async function sendOrder(){
+var o={first_name:$("fn").value.trim(),last_name:$("ln").value.trim(),phone:$("ph").value.trim(),messenger:$("ms").value+": "+$("mi").value.trim(),details:$("od").value.trim()};
+if(!o.first_name||!o.last_name)return msg("om","نام و نام خانوادگی لازمه.","bad");
+if(!/^09\d{9}$/.test(o.phone))return msg("om","شمارهٔ تماس معتبر نیست.","bad");
+if($("mi").value.trim().length<3)return msg("om","آیدی روبیکا یا بله لازمه.","bad");
+if(!demo){var r=await sb.from("orders").insert(o);if(r.error)return msg("om","خطا در ثبت. دوباره تلاش کن.","bad")}
+$("o2").classList.add("hide");$("o1").classList.remove("hide");$("od").value="";msg("om","✅ سفارش ثبت شد. به‌زودی تماس می‌گیرم.","ok")}
+async function sendRev(){var v={name:$("rn").value.trim(),rating:+$("rr").value,comment:$("rc").value.trim()};
+if(!v.name||v.comment.length<5)return msg("rm","نام و نظر رو کامل بنویس.","bad");
+if(!demo){var r=await sb.from("reviews").insert(v);if(r.error)return msg("rm","خطا در ارسال.","bad")}
+$("rc").value="";msg("rm","✅ ممنون! بعد از تأیید نمایش داده میشه.","ok")}
+
+async function login(){if(demo)return msg("am","اول باید دیتابیس (Supabase) وصل بشه.","bad");
+var r=await sb.auth.signInWithPassword({email:$("ae").value.trim(),password:$("ap").value});
+if(r.error)return msg("am","ایمیل یا رمز اشتباهه.","bad");$("am").className="msg hide";$("al").classList.add("hide");$("ad").classList.remove("hide");loadAdmin()}
+async function logout(){if(sb)await sb.auth.signOut();$("ad").classList.add("hide");$("al").classList.remove("hide")}
+async function loadAdmin(){
+var p=await sb.from("portfolio").select("*").order("created_at",{ascending:false});
+$("apf").innerHTML=(p.data||[]).map(function(x){return '<div class="card row"><span>'+esc(x.title)+'</span><button class="btn sm rd" onclick="del(\'portfolio\','+x.id+')">حذف</button></div>'}).join("")||'<p class="mu">خالی</p>';
+var o=await sb.from("orders").select("*").order("created_at",{ascending:false});
+$("aor").innerHTML=(o.data||[]).map(function(x){return '<div class="card"><b>'+esc(x.first_name+" "+x.last_name)+'</b> — '+esc(x.phone)+'<br>'+esc(x.messenger)+'<br><span class="mu">'+esc(x.details)+'</span><br><button class="btn sm rd" onclick="del(\'orders\','+x.id+')">حذف</button></div>'}).join("")||'<p class="mu">سفارشی نیست</p>';
+var v=await sb.from("reviews").select("*").order("created_at",{ascending:false});
+$("arv").innerHTML=(v.data||[]).map(function(x){return '<div class="card">'+"⭐".repeat(x.rating)+' <b>'+esc(x.name)+'</b><br>'+esc(x.comment)+'<br>'+(x.approved?'<span class="ok">نمایش داده میشه</span> ':'<button class="btn sm" onclick="appr('+x.id+')">تأیید</button> ')+'<button class="btn sm rd" onclick="del(\'reviews\','+x.id+')">حذف</button></div>'}).join("")||'<p class="mu">نظری نیست</p>'}
+async function del(t,id){if(!confirm("حذف بشه؟"))return;await sb.from(t).delete().eq("id",id);loadAdmin();loadPf();loadRv()}
+async function appr(id){await sb.from("reviews").update({approved:true}).eq("id",id);loadAdmin();loadRv()}
+async function addPf(){var t=$("pt").value.trim(),f=$("pi").files[0];if(!t)return msg("am","عنوان لازمه.","bad");var url="";
+if(f){var path=Date.now()+"-"+f.name.replace(/[^\w.]/g,"_");var u=await sb.storage.from("portfolio").upload(path,f);if(u.error)return msg("am","آپلود عکس نشد.","bad");url=sb.storage.from("portfolio").getPublicUrl(path).data.publicUrl}
+var r=await sb.from("portfolio").insert({title:t,descr:$("pd").value.trim(),image_url:url});if(r.error)return msg("am","ثبت نشد.","bad");
+$("pt").value="";$("pd").value="";$("pi").value="";msg("am","✅ اضافه شد.","ok");loadAdmin();loadPf()}
+function chkAdmin(){if(location.hash==="#admin")$("m4").classList.add("on")}
+window.addEventListener("hashchange",chkAdmin);chkAdmin();
+loadPf();loadRv();
+</script>
+</body>
+  </html>
